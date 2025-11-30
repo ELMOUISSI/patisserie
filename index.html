@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pâtisserie Marocaine & Gâteaux Modernes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fef9f5;
+            color: #5a3921;
+            line-height: 1.6;
+        }
+
+        :root {
+            --saffron: #FF9933;
+            --mint: #4CAF89;
+            --deep-blue: #1A5276;
+            --terracotta: #C1552C;
+            --gold: #D4AF37;
+            --dark-brown: #5D4037;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(to right, var(--deep-blue), var(--mint));
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--gold);
+            margin-left: 5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.12);
+            color: var(--gold);
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url('https://images.unsplash.com/photo-1551504738-4d8537b8d793?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')
+                center/cover no-repeat;
+            text-align: center;
+            color: white;
+            padding: 120px 20px;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--saffron);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid var(--saffron);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--saffron);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 30px;
+            color: var(--deep-blue);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            margin: 10px auto 0;
+            background: linear-gradient(to right, var(--saffron), var(--mint));
+        }
+
+        /* GRID PRODUITS */
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .recipe-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            border-top: 5px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .recipe-card:hover {
+            transform: scale(1.03);
+        }
+
+        .recipe-card::before {
+            content: "Top Vente";
+            position: absolute;
+            top: 10px;
+            right: -40px;
+            transform: rotate(45deg);
+            background: var(--saffron);
+            color: white;
+            padding: 4px 40px;
+            font-size: 12px;
+            display: none;
+        }
+
+        .recipe-card:nth-child(1)::before,
+        .recipe-card:nth-child(2)::before {
+            display: block;
+        }
+
+        .recipe-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .recipe-content {
+            padding: 18px;
+        }
+
+        .recipe-content h3 {
+            color: var(--deep-blue);
+            margin-bottom: 8px;
+        }
+
+        .recipe-content p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .recipe-meta {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--saffron);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* ORDER BAR */
+        .order-bar {
+            background: linear-gradient(to right, var(--deep-blue), var(--mint));
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .order-form {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .order-form input,
+        .order-form select {
+            padding: 10px 12px;
+            border-radius: 5px;
+            border: none;
+            min-width: 200px;
+        }
+
+        .order-form button {
+            background: var(--saffron);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .order-form button:hover {
+            background: #e6891e;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 60px;
+            background: linear-gradient(to right, var(--deep-blue), #0d3a5c);
+            color: white;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            padding-top: 10px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 15px 0 5px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 10px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .order-form input,
+            .order-form select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-mug-hot" style="margin-right:8px;color:var(--gold);"></i>
+                Pâtisserie <span>Marrakech</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#recettes">Pâtisseries</a></li>
+                    <li><a href="#gateaux">Gâteaux Modernes</a></li>
+                    <li><a href="#commander">Commander</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <h1>Douceurs Authentiques & Gâteaux Modernes</h1>
+            <p>Un mélange parfait entre la tradition marocaine et la pâtisserie moderne, préparée avec passion et finesse.</p>
+            <a href="#commander" class="btn">Commander maintenant</a>
+        </div>
+    </section>
+
+    <!-- PÂTISSERIES TRADITIONNELLES -->
+    <section id="recettes">
+        <div class="container">
+            <h2 class="section-title">Pâtisseries Traditionnelles</h2>
+            <div class="recipes-grid">
+
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="recipe-content">
+                        <h3>Briouats au Miel</h3>
+                        <p>Feuilles croustillantes fourrées d’amandes, arrosées d’un miel parfumé à la fleur d’oranger.</p>
+                        <div class="recipe-meta">
+                            <span>⭐ 4.9</span>
+                            <span>20 MAD / pièce</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1567608285966-c2b5a39716e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="recipe-content">
+                        <h3>Cornes de Gazelle</h3>
+                        <p>Délicates pâtisseries en forme de croissant, garnies d’une savoureuse pâte d’amande.</p>
+                        <div class="recipe-meta">
+                            <span>⭐ 4.8</span>
+                            <span>25 MAD / pièce</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="recipe-content">
+                        <h3>Chebakia</h3>
+                        <p>Rosaces au sésame et miel, incontournables du Ramadan et des grandes occasions.</p>
+                        <div class="recipe-meta">
+                            <span>⭐ 4.7</span>
+                            <span>15 MAD / pièce</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GÂTEAUX MODERNES -->
+    <section id="gateaux">
+        <div class="container">
+            <h2 class="section-title">Gâteaux Modernes</h2>
+            <div class="recipes-grid">
+
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="recipe-content">
+                        <h3>Royal Chocolat</h3>
+                        <p>Mousse chocolat noir, croustillant praliné et génoise légère.</p>
+                        <div class="recipe-meta">
+                            <span>💰 180 MAD</span>
+                            <span>🎂 8 parts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1567608285966-c2b5a39716e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="recipe-content">
+                        <h3>Fraisier</h3>
+                        <p>Crème mousseline, fraises fraîches et génoise moelleuse.</p>
+                        <div class="recipe-meta">
+                            <span>💰 200 MAD</span>
+                            <span>🍰 10 parts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="recipe-content">
+                        <h3>Mille-feuille</h3>
+                        <p>Pâte feuilletée caramélisée et crème pâtissière à la vanille.</p>
+                        <div class="recipe-meta">
+                            <span>💰 15 MAD</span>
+                            <span>✨ par part</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="recipe-content">
+                        <h3>Gâteau Opéra</h3>
+                        <p>Biscuit amande imbibé café, ganache chocolat & crème au beurre.</p>
+                        <div class="recipe-meta">
+                            <span>💰 170 MAD</span>
+                            <span>☕ intense</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMANDER -->
+    <section id="commander">
+        <div class="container">
+            <h2 class="section-title">Commander vos Gâteaux</h2>
+            <div class="order-bar">
+                <p>🎁 Livraison gratuite à partir de 200 MAD — Partout au Maroc</p>
+
+                <form class="order-form">
+                    <input type="text" placeholder="Votre nom" required>
+                    <input type="email" placeholder="Votre email" required>
+                    <input type="tel" placeholder="Votre téléphone" required>
+
+                    <select required>
+                        <option value="" disabled selected>Choisir un produit</option>
+                        <optgroup label="Pâtisseries Traditionnelles">
+                            <option>Briouats au miel</option>
+                            <option>Cornes de Gazelle</option>
+                            <option>Chebakia</option>
+                        </optgroup>
+                        <optgroup label="Gâteaux Modernes">
+                            <option>Royal Chocolat</option>
+                            <option>Fraisier</option>
+                            <option>Mille-feuille</option>
+                            <option>Gâteau Opéra</option>
+                        </optgroup>
+                    </select>
+
+                    <input type="number" placeholder="Quantité" min="1" required>
+
+                    <button type="submit">Commander</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Pâtisserie Marrakech</h3>
+                    <p>Depuis 1972, spécialistes des pâtisseries marocaines et gâteaux modernes faits maison.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Nos Boutiques</h3>
+                    <ul>
+                        <li>📍 Marrakech Médina</li>
+                        <li>📍 Casablanca Centre-ville</li>
+                        <li>📍 Rabat Agdal</li>
+                        <li>📍 Paris 5ème</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>📧 contact@patisseriemarrakech.ma</li>
+                        <li>📞 +212 6 12 34 56 78</li>
+                        <li>📍 Rue de la Koutoubia, Marrakech</li>
+                        <li>🕒 8h - 22h / 7j/7</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Pâtisserie Marrakech — Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script>
+        // Form confirmation
+        const orderForm = document.querySelector('.order-form');
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci ! Votre commande a été envoyée. Nous vous contacterons rapidement.');
+            orderForm.reset();
+        });
+
+        // Fade-in animation on scroll
+        const cards = document.querySelectorAll('.recipe-card');
+        const observer = new IntersectionObserver((entries)=>{
+            entries.forEach(entry=>{
+                if(entry.isIntersecting){
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        cards.forEach(card=>{
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(25px)';
+            card.style.transition = '0.5s';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
